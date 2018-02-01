@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>韩国信的博客</title>
+    <!--<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.css">-->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- /在服务器端代表是服务启动的根目录-->
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Rocky blog</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <%if(user){%>
+                  <li><a href="/article/add">发表文章</a></li>
+                <%}else{%>
+                  <li><a href="/user/reg">注册</a></li>
+                  <li><a href="/user/login">登录</a></li>
+                <%}%>
+            </ul>
+            <form action="/article/list?keyword=<%=keyword%>" class="navbar-form navbar-left" role="search">               <div class="form-group">
+                                   <input id="keyword" name="keyword" type="text" class="form-control" value="<%=keyword%>" placeholder="请输入搜索关键字">
+                               </div>
+                               <button type="submit" class="btn btn-default">搜索</button>
+                           </form>
+            <%
+            if(user){%>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><img class="img-rounded" src="<%=user.avatar%>" alt=""></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%=user.username%> <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/user/logout">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <%}
+            %>
+
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+    <%if(success){%>
+    <div class="alert alert-success" role="alert"><%=success%></div>
+    <%}%>
+
+    <%if(error){%>
+    <div class="alert alert-danger" role="alert"><%=error%></div>
+    <%}%>
